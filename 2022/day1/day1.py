@@ -1,4 +1,4 @@
-def find_max_calories (input):
+def find_calorie_per_elf (input):
     elf_content = input.split("\n\n") 
     
     calorie_per_elf = []
@@ -15,12 +15,25 @@ def find_max_calories (input):
         item_sum = sum(each_item_int)
         calorie_per_elf.append(item_sum)    
         
-    return max(calorie_per_elf)
+    return calorie_per_elf
+
+def find_top_one_calorie (input):
+    
+    return max(find_calorie_per_elf(input))
+
+
+def find_top_three_calories (input):
+    calorie_per_elf = find_calorie_per_elf(input)
+    top_three = sorted(calorie_per_elf, reverse=True)[:3]
+    
+    return sum(top_three)
 
 if __name__ == '__main__':
        
     with open('input.txt') as f:
         lines = f.readlines()
         test_input = ''.join(lines)
-        
-    print(find_max_calories(test_input))
+            
+    print(find_top_one_calorie(test_input))
+
+    print(find_top_three_calories(test_input))
