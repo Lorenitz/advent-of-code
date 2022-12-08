@@ -4,6 +4,12 @@ result_score = {
     "lose": 0
 }
 
+elf_strategy = {
+    "X": "lose",
+    "Y": "draw",
+    "Z": "win" 
+}
+
 elements = {
     "A" : "rock",
     "B" : "paper",
@@ -26,11 +32,34 @@ def get_final_results(input):
     for match in matches: 
         opponent_raw, you_raw = match.split(' ')
         opponent = elements[opponent_raw]
-        you = elements[you_raw]
+        you = get_strategy_element(opponent, you_raw)
         print(f"Opponent choose : {opponent}, You choose: {you}, score = {jkpw_match(you, opponent)} ")
         final_score = final_score + jkpw_match(you, opponent)
         
     return final_score
+
+def get_strategy_element(opponent, raw_strategy):
+    strategy = elf_strategy[raw_strategy]
+    
+    if opponent=="rock":
+        if strategy=="win":
+            return 'paper'
+        elif strategy=="lose":
+            return 'scissors' 
+    if opponent=="paper":
+        if strategy=="win":
+            return 'scissors'
+        elif strategy=='lose':
+            return 'rock'
+    if opponent=='scissors':
+        if strategy=="win":
+           return 'rock'
+        elif strategy=="lose":
+            return 'paper'
+        
+    return opponent # If draw return the same as the opponent 
+            
+    
 
 def jkpw_match(you, opponent):
     score = element_score[you]
@@ -57,3 +86,11 @@ def jkpw_match(you, opponent):
     score = score + result_score[result]
     
     return score
+
+if __name__ == '__main__':
+    
+    with open('input.txt') as f:
+        lines = f.readlines()
+        test_input = ''.join(lines)
+
+    print(get_final_results(test_input))
