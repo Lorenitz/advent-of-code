@@ -30,7 +30,15 @@ def get_final_results(input):
     final_score = 0
     
     for match in matches: 
+        # equivalent to:
+        #     match_elements = match.split(' ') # ex: ['A','X']
+        #     opponent_raw, you_raw = match_elements
+        
+        #     match_elements = match.split(' ') # ex: ['A','X']
+        #     opponent_raw = match_elements[0]
+        #     you_raw = match_elements[1]
         opponent_raw, you_raw = match.split(' ')
+        
         opponent = elements[opponent_raw]
         you = get_strategy_element(opponent, you_raw)
         print(f"Opponent choose : {opponent}, You choose: {you}, score = {jkpw_match(you, opponent)} ")
