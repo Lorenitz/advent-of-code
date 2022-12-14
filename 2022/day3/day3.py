@@ -82,7 +82,13 @@ def calc_priority_rucksack(input):
         print(rucksack)        
                 
     return priority_sum
-   
+ 
+def rucksack_reorganization(input):
+    rucksack_list = input.split("\n")
+    
+    size_rucksack_list = len(rucksack_list)
+    
+    return print(size_rucksack_list)    
    
 if __name__ == '__main__':
     
