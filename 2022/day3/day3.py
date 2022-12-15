@@ -86,14 +86,40 @@ def calc_priority_rucksack(input):
 def rucksack_reorganization(input):
     rucksack_list = input.split("\n")
     
-    size_rucksack_list = len(rucksack_list)
+    priority_sum = 0
+    j=3
+    for i in range(0,len(rucksack_list),3):
+        rucksacs=rucksack_list[i:j]
+        j += 3
+        
+        rucksack = { 
+                "common_item":'',
+                "priority":0
+            }
+        
+        for item_a in rucksacs[0]:
+            for item_b in rucksacs[1]:
+                for item_c in rucksacs[2]:
+                    if item_a == item_b == item_c:
+                        rucksack["common_item"] = item_a
+        
+        rucksack["priority"]=ITEM_PRIORITY[rucksack["common_item"]]
+        
+        priority_sum = priority_sum + rucksack["priority"]
+        
+        #print(rucksacs)
+        #print(rucksack)
+        
+        #print(priority_sum)    
     
-    return print(size_rucksack_list)    
-   
+    return priority_sum
+      
+      
 if __name__ == '__main__':
     
     with open('input.txt') as f:
         lines = f.readlines()
         test_input = ''.join(lines)
 
-    print(calc_priority_rucksack(test_input))
+    #print(calc_priority_rucksack(test_input))
+    print(rucksack_reorganization(test_input))
