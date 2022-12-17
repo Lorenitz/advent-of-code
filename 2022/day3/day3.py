@@ -106,11 +106,6 @@ def rucksack_reorganization(input):
         rucksack["priority"]=ITEM_PRIORITY[rucksack["common_item"]]
         
         priority_sum = priority_sum + rucksack["priority"]
-        
-        #print(rucksacs)
-        #print(rucksack)
-        
-        #print(priority_sum)    
     
     return priority_sum
       
