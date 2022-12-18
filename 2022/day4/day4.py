@@ -18,23 +18,35 @@ def check_fully_contains(self, other):
     
     return False
 
+def check_overlap(self,other):
+    if (self['end'] < other['start']) or (self['start'] > other['end']):
+        return False
+
+    return True
+
 def camp_cleanup(input):
     section_assignments = input.split('\n')
     
-    sum_fully_contains = 0
+    sum_fully_contains = 0 
+    sum_overlaps = 0
     
     for line in section_assignments:
         elements = line.split(',')
         assign_a = create_assignment(elements[0])
         assign_b = create_assignment(elements[1])       
-        result = check_fully_contains(assign_a, assign_b)
+        result_1 = check_fully_contains(assign_a, assign_b)
+        result_2 = check_overlap(assign_a, assign_b)
+        sum_fully_contains += int(result_1)
+        sum_overlaps +=(int(result_2))
         
-        sum_fully_contains += int(result)
+        #print(f"{assign_a} fully contains {assign_b} = {result_1}")
         
-        print(f"{assign_a} fully contains {assign_b} = {result}")
-             
-   
-    return sum_fully_contains
+        print(f"{assign_a} overlaps {assign_b} = {result_2}")         
+    
+    return {
+        'sum_overlaps':sum_overlaps,
+        'sum_fully_contains':sum_fully_contains
+    }
 
 
 
