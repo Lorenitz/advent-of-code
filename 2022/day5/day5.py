@@ -1,9 +1,9 @@
-def follow_instructions(input, stacks):
+def follow_instructions(input, stacks, movemultiple):
     #read the instructions to push and pop from test_input
     # for each instruction, we will need to manipulate the steps.
     #instruction_list = input.split("\n")
-    command_list = input.split("\n") #todo: change with a single \n
-    print(command_list)
+    command_list = input.split("\n") 
+ 
     
     for content in command_list:
         each_item = content.split()
@@ -12,18 +12,17 @@ def follow_instructions(input, stacks):
         origin = each_item[3]
         destiny = each_item[5]
         
-        for i in range(int(qty_move)):
-            element_popped = pop(stacks,origin)
-            push(stacks, destiny,element_popped)
+        if movemultiple == False:
+            for i in range(int(qty_move)):
+                element_popped = pop(stacks,origin)
+                push(stacks, destiny,element_popped)
+        else:   
+            elements_popped = pop_multiples(stacks, origin, int(qty_move))
+            push_multiples(stacks, destiny, elements_popped)
         
-        print(stacks)
-        #print(origin)
-        #print(destiny)
-        
-    #return stacks
 
 def push(stacks, target, element):    
-    #push: add, plance an element on top of target stack
+    #push: add, place an element on top of target stack
     stacks[target].append(element)
     return
     
@@ -32,6 +31,25 @@ def pop(stacks, target):
    
     popped_element = stacks[target].pop()
     return popped_element
+
+
+### Part II
+
+# Description: Instead of one by one, all itens at once
+
+def push_multiples(stacks, target, elements):
+    stacks[target] = stacks[target] + elements
+
+def pop_multiples(stacks, target, qtd):
+    len_stack = len(stacks[target]) - qtd
+    #print(len_stack)
+    popped_elements = stacks[target][int(len_stack):]
+    stacks[target] = stacks[target][:int(len_stack)]
+    
+    return popped_elements
+  
+   
+   
 
 if __name__ == '__main__':
        
@@ -51,4 +69,6 @@ if __name__ == '__main__':
         "9": ['D', 'R', 'S', 'T', 'J']                         
     }
             
-    print(follow_instructions(input, stacks))
+    follow_instructions(input, stacks, True)
+    
+    print(stacks)
