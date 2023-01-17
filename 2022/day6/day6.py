@@ -5,15 +5,32 @@ def contain_duplicate(packet):
             char_a = packet[pos_a]
             char_b = packet[pos_b]
             if pos_a != pos_b and char_a == char_b:
-                return True
+    
+             return True
         
         
         
     return False
-
+#Part I
 def slicing_packet(packet):
+    start = 0
+    len_packet = len(packet)
+    end = 4
+    while end <= len(packet):
+        moved_packet = packet[start:end]
+        print(moved_packet)
+        start +=1
+        end +=1  
+        if not contain_duplicate(moved_packet):
+            return end-1
+#Part II     
+def slicing_packet_2(packet, size):
+    end = size
+    len_packet = len(packet)
+    for end in range(end, len_packet):
+        start = end-size
+        moved_packet = packet[start:end]
+        print(moved_packet)
+        if not contain_duplicate(moved_packet):
+            return end
     
-    for group_char in range(3, len(packet)):
-        print[packet[3:len(packet)]]
-    
-    return
